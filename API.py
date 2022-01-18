@@ -17,7 +17,6 @@ class YuGiOhAPI:
         self.TYPE = df['type'].item()
         self.DESC = df['desc'].item()
         self.RACE = df.race.item()
-        self.ARCHETYPE = df.archetype.item()
         self.IMAGE = df.card_images.item()
 
         if 'Monster' in self.TYPE:
@@ -30,6 +29,10 @@ class YuGiOhAPI:
             self.DEFENCE = False
             self.LEVEL = False
             self.ATTRIBUTE = False
+        try:
+            self.ARCHETYPE = df.archetype.item()
+        except:
+            self.ARCHETYPE = False
        
         
         

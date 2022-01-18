@@ -25,11 +25,15 @@ while True:
     if event == '-CARD_NAME-':
         card = yugs('-CARD_NAME-')
         details = [card.get_name(),
-                    card.get_type,
+                    card.get_type(),
+                    card.get_archetype(),
+                    card.get_attribute(),
+                    card.get_atk(),
+                    card.get_def(),
+                    card.get_desc(),
                     ]
-        try:
-            
-        except:
+
+    window['List_box'].update(details)
 
         
 
