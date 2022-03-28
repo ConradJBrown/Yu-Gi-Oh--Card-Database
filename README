@@ -1,0 +1,7 @@
+This will contain my working plan for this program, The plan is to create an app that will be used to store the inventory of all yugioh cards you own, whether that be personal or maybe in the future for business use.
+
+For now i am going to work slowly on each step and maybe ad some sub-steps as i work on this project.
+
+Current Goals:
+[DONE]Get a working response from the API to get all cards into a Pandas Library
+

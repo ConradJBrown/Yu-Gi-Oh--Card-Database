@@ -68,4 +68,6 @@ class YuGiOhAPI:
     def get_attribute(self):
         return self.ATTRIBUTE
 
+
+
         
