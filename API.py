@@ -11,33 +11,37 @@ class YuGiOhAPI:
         parameters = {'name': card}
         response = requests.get('https://db.ygoprodeck.com/api/v7/cardinfo.php', params=parameters)
         data = response.json()
-        df = pd.DataFrame.from_dict(data['data'])
-        self.ID = df['id'].item()
-        self.NAME = df.name.item()
-        self.TYPE = df['type'].item()
-        self.DESC = df['desc'].item()
-        self.RACE = df.race.item()
-        self.IMAGE = df.card_images.item()
+        try:    
+            df = pd.DataFrame.from_dict(data['data'])
+            self.ID = df['id'].item()
+            self.NAME = df.name.item()
+            self.TYPE = df['type'].item()
+            self.DESC = df['desc'].item()
+            self.RACE = df.race.item()
+            self.IMAGE = df.card_images.item()
 
-        if 'Monster' in self.TYPE:
-            self.ATTACK = df['atk'].item()
-            self.DEFENCE = df['def'].item()
-            self.LEVEL = df.level.item()
-            self.ATTRIBUTE = df.attribute.item()
-        else:
-            self.ATTACK = False
-            self.DEFENCE = False
-            self.LEVEL = False
-            self.ATTRIBUTE = False
-        try:
-            self.ARCHETYPE = df.archetype.item()
+            if 'Monster' in self.TYPE:
+                self.ATTACK = df['atk'].item()
+                if 'Link' not in self.TYPE:
+                    self.DEFENCE = df['def'].item()
+                    self.LEVEL = df.level.item()
+                self.ATTRIBUTE = df.attribute.item()
+            else:
+                self.ATTACK = False
+                self.DEFENCE = False
+                self.LEVEL = False
+                self.ATTRIBUTE = False
+            try:
+                self.ARCHETYPE = df.archetype.item()
+            except:
+                self.ARCHETYPE = False
+            self.PASS = True
         except:
-            self.ARCHETYPE = False
+            self.PASS = False
+            print("That card could not be found")
+
        
         
-        
-
-
     def get_name(self):
         return self.NAME
 
@@ -67,6 +71,9 @@ class YuGiOhAPI:
 
     def get_attribute(self):
         return self.ATTRIBUTE
+    
+    def get_pass(self):
+        return self.PASS
 
 
 
