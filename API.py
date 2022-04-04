@@ -2,78 +2,45 @@ from numpy import False_
 import requests
 import json
 import pandas as pd
+from os.path import exists
+import csv
 
 
-class YuGiOhAPI:
-    #Grabbing the card asked for from the API
-    
-    def __init__(self, card):
-        parameters = {'name': card}
-        response = requests.get('https://db.ygoprodeck.com/api/v7/cardinfo.php', params=parameters)
-        data = response.json()
-        try:    
-            df = pd.DataFrame.from_dict(data['data'])
-            self.ID = df['id'].item()
-            self.NAME = df.name.item()
-            self.TYPE = df['type'].item()
-            self.DESC = df['desc'].item()
-            self.RACE = df.race.item()
-            self.IMAGE = df.card_images.item()
+URL = 'https://db.ygoprodeck.com/api/v7/cardinfo.php'
+FILE_INVENTORY = 'YuGiOh_Inventory.csv'
+INVENTORY = pd.read_csv('Database.csv')
 
-            if 'Monster' in self.TYPE:
-                self.ATTACK = df['atk'].item()
-                if 'Link' not in self.TYPE:
-                    self.DEFENCE = df['def'].item()
-                    self.LEVEL = df.level.item()
-                self.ATTRIBUTE = df.attribute.item()
-            else:
-                self.ATTACK = False
-                self.DEFENCE = False
-                self.LEVEL = False
-                self.ATTRIBUTE = False
-            try:
-                self.ARCHETYPE = df.archetype.item()
-            except:
-                self.ARCHETYPE = False
-            self.PASS = True
-        except:
-            self.PASS = False
-            print("That card could not be found")
+def CardInfo(card):
+    parameters = {'name': card}
+    response = requests.get(URL, params=parameters)
+    data = response.json()   
+    df = pd.DataFrame.from_dict(data['data'])
+    pd.set_option('display.max_colwidth', None)
+    return df
+
+def main():
+    name = input("Card name: ")
+    try:
+        card = CardInfo(name)
+    except:
+        print('This card does not exist')
+        return
+    print(card.desc.to_string(index=False))
+
+    add_to_Inv = input('Would you like to add this card to inv? [y/n] ')
+    while (add_to_Inv != 'y') or (add_to_Inv != 'n'):
+        print('Input invalid. Please enter [y/n]')
+        add_to_Inv = input('Would you like to add this card to inv? [y/n] ')
+    if add_to_Inv == 'y':
+        pd.concat([INVENOTRY, card], ignore_index=True)
+        display(INVENORY)
+    else:
+        print('Card was not added')
+
+main()
 
        
-        
-    def get_name(self):
-        return self.NAME
-
-    def get_atk(self):
-        return self.ATTACK
-
-    def get_def(self):
-        return self.DEFENCE
-
-    def get_desc(self):
-        return self.DESC
-
-    def get_ID(self):
-        return self.ID
-
-    def get_type(self):
-        return self.TYPE
-
-    def get_race(self):
-        return self.RACE
-
-    def get_archetype(self):
-        return self.IMAGE
-    
-    def get_level(self):
-        return self.LEVEL
-
-    def get_attribute(self):
-        return self.ATTRIBUTE
-    
-    def get_pass(self):
-        return self.PASS
+       
 
 
 
