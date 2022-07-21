@@ -1,7 +1,22 @@
-This will contain my working plan for this program, The plan is to create an app that will be used to store the inventory of all yugioh cards you own, whether that be personal or maybe in the future for business use.
+# Yu-Gi-Oh! card database
 
-For now i am going to work slowly on each step and maybe ad some sub-steps as i work on this project.
+## Overview
+This program is designed to create a database and inventory system to keep track of cards inventoried, prices of different versions of cards.
+Using react the application will be able to keep track of inventory and up to date prices of cards. Hopefully this will be usable by game stores to
+help with the sale of cards.
 
-Current Goals:
-[DONE]Get a working response from the API to get all cards into a Pandas Library
+## Plan
+### Phase 1
+Learn to use react and to create the basics of the program, phase one will consist of me learning to create with react and will end once i am able to
+search for a card and have the image of the card appear on my screen with the price of the cards visable.
+
+**Step 1:** Install and create the react app
+
+### Phase 2
+Phase two will begin shortly after phase one has finished. The plan for phase to is to create the actual backend database. This phase will be mostly
+me working on how to create the database to hold the inventory of the cards we search for.
+
+### Phase 3
+Phase 3 will include me learning to create a check out window and remove the cards from the inventory and also create the logic for calculating prices
+and calculating totals
 
