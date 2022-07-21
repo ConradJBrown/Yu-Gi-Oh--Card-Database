@@ -11,6 +11,7 @@ Learn to use react and to create the basics of the program, phase one will consi
 search for a card and have the image of the card appear on my screen with the price of the cards visable.
 
 **Step 1:** Install and create the react app **(DONE)**
+**Step 2:** Create the search bar and button without functionality
 
 ### Phase 2
 Phase two will begin shortly after phase one has finished. The plan for phase to is to create the actual backend database. This phase will be mostly
